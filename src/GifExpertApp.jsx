@@ -1,23 +1,29 @@
-import { useState } from "react"
-import { AddCategory } from "./components/AddCategory"
+import { useState } from "react";
+import { AddCategory, GifGrid, Esperando } from "./components";
+import '@fontsource-variable/onest';
 
 export const GifExpertApp = () => {
 
-    const [categories, setCategories] = useState(['One punch', 'Dragon Ball'])
-    const onAddCategory = () => {
-        setCategories(['Roberto', ...categories])
-    }
+    const [categories, setCategories] = useState([]);
+
+    const onAddCategory = (newCategory) => {
+        if (categories.includes(newCategory)) return;
+        setCategories([newCategory, ...categories]);
+    };
 
     return (
-        <>
+        <div className="container relative z-10">
             <h1>Gif Expert App</h1>
-            <AddCategory setCategories={setCategories}/>
-            <button onClick={onAddCategory}>Agregar</button>
-            <ol>
-                {categories.map(category => {
-                    return <li key={category}> {category} </li>
-                })}
-            </ol>
-        </>
-    )
-}
+
+            <AddCategory
+                onNewCategory={(event) => onAddCategory(event)}
+            />
+
+            <Esperando categories={categories} />
+
+            {categories.map((category) => (
+                <GifGrid key={category} category={category} />
+            ))}
+        </div>
+    );
+};
