@@ -6,6 +6,7 @@ export const GifGrid = ({ category }) => {
     console.log('Renderizando GifGrid con categoría:', category);
   
     const { images } = useFetchGif(category);
+    console.log(images);
   
     return (
       <>

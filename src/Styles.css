@@ -5,13 +5,14 @@
   --purple-accent: rgb(97, 32, 158); 
   --semi-transparent-black: rgba(0, 0, 0, 0.8); 
   --semi-white: #fff;
+  --blue-label-de-jhonny-walker: #1589cc;
 }
 
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  overflow-x: hidden; /* Evita desbordamientos horizontales */
+  overflow-x: hidden; 
   box-sizing: border-box;
 }
 
@@ -21,7 +22,6 @@ html, body {
   box-sizing: border-box;
   color: var(--semi-white);
 }
-
 
 body {
   padding: 30px;
@@ -36,6 +36,7 @@ input {
   outline: none;
   padding: 10px 15px;
   width: 60%;
+  margin-bottom: 50px;
 }
 
 h1 {
@@ -47,6 +48,7 @@ h1 {
 
 h2 {
   font-size: 1.5rem;
+  color: var(--blue-label-de-jhonny-walker);
 }
 
 h3 {
@@ -131,24 +133,26 @@ h3 {
   position: relative;
   height: 100%;
   width: 100%;
-  background-color: #0f172a; 
+  background-color: #0f172a;
   z-index: 1;
+  pointer-events: none; 
 }
 
 .custom-bg::before,
 .custom-bg::after {
   content: '';
-  position: fixed;
+  position: absolute; 
   top: 40%;
   bottom: 0;
   height: 500px;
   width: 500px;
   border-radius: 50%;
   background: radial-gradient(
-      circle farthest-side,
-      rgba(255, 0, 182, 0.15),
-      rgba(255, 255, 255, 0)
+    circle farthest-side,
+    rgba(255, 0, 182, 0.15),
+    rgba(255, 255, 255, 0)
   );
+  z-index: -1; 
 }
 
 .custom-bg::before {
@@ -159,20 +163,18 @@ h3 {
   right: -20%;
 }
 
-
-@media (max-width: 768px) { 
-  input {
-      width: 90%;
+@media (max-width: 768px) {
+  .custom-bg::before,
+  .custom-bg::after {
+    height: 350px; 
+    width: 350px;
   }
+
+  input {
+    width: 90%;
+  }
+
   h1 {
     font-size: 2.8rem;
-  }
-
-  .esperando svg{
-    margin-top: 50px;
-  }
-
-  .esperando p{
-    margin-top: 50px;
   }
 }
