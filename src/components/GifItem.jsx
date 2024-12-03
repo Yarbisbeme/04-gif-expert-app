@@ -1,10 +1,10 @@
 // GifItem.js
 import React, { useState } from 'react';
-import { useFetchGif } from '../hooks/useFetchGif';
+import { useColor } from '../hooks';
 
 export const GifItem = ({ title, url }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { shadowColor } = useFetchGif([], url);
+    const { shadowColor } = useColor([], url);
 
     const handleImageClick = () => {
         setIsModalOpen(true);
