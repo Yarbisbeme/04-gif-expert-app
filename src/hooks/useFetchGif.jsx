@@ -6,9 +6,9 @@ export const useFetchGif = (category, url) => {
     const [shadowColor, setShadowColor] = useState('#000');
 
     useEffect(() => {
-        // Función para obtener GIFs
+
         const fetchGifs = async () => {
-            if (!category) return; // No hacer nada si category no está definida
+            if (!category) return; 
             try {
                 const newGifs = await getGifs(category);
                 setImages(newGifs.length > 0 ? newGifs : []);
@@ -17,9 +17,9 @@ export const useFetchGif = (category, url) => {
             }
         };
 
-        // Función para calcular el color dominante
+
         const getDominantColor = (imageUrl) => {
-            if (!imageUrl) return; // No hacer nada si la URL no está definida
+            if (!imageUrl) return; 
 
             const img = new Image();
             img.crossOrigin = 'anonymous';
@@ -35,7 +35,6 @@ export const useFetchGif = (category, url) => {
 
                 const imageData = context.getImageData(0, 0, canvas.width, canvas.height).data;
 
-                // Calcular promedio RGB
                 let r = 0, g = 0, b = 0, count = 0;
                 for (let i = 0; i < imageData.length; i += 4) {
                     r += imageData[i];
@@ -44,15 +43,13 @@ export const useFetchGif = (category, url) => {
                     count++;
                 }
 
-                // Promedio final
                 setShadowColor(`rgb(${Math.floor(r / count)}, ${Math.floor(g / count)}, ${Math.floor(b / count)})`);
             };
         };
 
-        // Ejecutar las funciones si los datos son válidos
         if (url) getDominantColor(url);
         fetchGifs();
-    }, [category, url]); // Dependencias del efecto
+    }, [category, url]); 
 
     return { images, shadowColor };
 };
