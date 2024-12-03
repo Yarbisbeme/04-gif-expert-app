@@ -1,4 +1,3 @@
-// useFetchGif.js
 import { useEffect, useState } from "react";
 import { getGifs } from "../helpers/gegif";
 
@@ -7,14 +6,21 @@ export const useFetchGif = (category, url) => {
     const [shadowColor, setShadowColor] = useState('#000');
 
     useEffect(() => {
+        // Función para obtener GIFs
         const fetchGifs = async () => {
-            const newGifs = await getGifs(category);
-            if (newGifs.length > 0) {
-                setImages(newGifs);
+            if (!category) return; // No hacer nada si category no está definida
+            try {
+                const newGifs = await getGifs(category);
+                setImages(newGifs.length > 0 ? newGifs : []);
+            } catch (error) {
+                console.error('Error fetching GIFs:', error);
             }
         };
 
+        // Función para calcular el color dominante
         const getDominantColor = (imageUrl) => {
+            if (!imageUrl) return; // No hacer nada si la URL no está definida
+
             const img = new Image();
             img.crossOrigin = 'anonymous';
             img.src = imageUrl;
@@ -28,8 +34,9 @@ export const useFetchGif = (category, url) => {
                 context.drawImage(img, 0, 0, canvas.width, canvas.height);
 
                 const imageData = context.getImageData(0, 0, canvas.width, canvas.height).data;
-                let r = 0, g = 0, b = 0, count = 0;
 
+                // Calcular promedio RGB
+                let r = 0, g = 0, b = 0, count = 0;
                 for (let i = 0; i < imageData.length; i += 4) {
                     r += imageData[i];
                     g += imageData[i + 1];
@@ -37,25 +44,15 @@ export const useFetchGif = (category, url) => {
                     count++;
                 }
 
-                r = Math.floor(r / count);
-                g = Math.floor(g / count);
-                b = Math.floor(b / count);
-
-                setShadowColor(`rgb(${r}, ${g}, ${b})`);
+                // Promedio final
+                setShadowColor(`rgb(${Math.floor(r / count)}, ${Math.floor(g / count)}, ${Math.floor(b / count)})`);
             };
         };
 
-        if (url) {
-            getDominantColor(url);
-        }
+        // Ejecutar las funciones si los datos son válidos
+        if (url) getDominantColor(url);
+        fetchGifs();
+    }, [category, url]); // Dependencias del efecto
 
-        if (category) {
-            fetchGifs();
-        }
-    }, [category, url]);
-
-    return {
-        images,
-        shadowColor,
-    };
+    return { images, shadowColor };
 };

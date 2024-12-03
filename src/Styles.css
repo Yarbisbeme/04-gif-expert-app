@@ -7,12 +7,21 @@
   --semi-white: #fff;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Evita desbordamientos horizontales */
+  box-sizing: border-box;
+}
+
 * {
   font-family: 'Onest Variable', 'RubikVariable';
   background-color: var(--dark-background);
   box-sizing: border-box;
   color: var(--semi-white);
 }
+
 
 body {
   padding: 30px;
@@ -70,7 +79,7 @@ h3 {
 .card:hover {
   transform: scale(1.05);
   transition: transform 0.3s ease-in-out, box-shadow 0.4s ease-in-out;
-  box-shadow: 0 0px 40px  var(--semi-white);
+  box-shadow: 0 0px 30px rgba(255, 255, 255, 0.5); /* Ajusta aquí */
 }
 
 .modal {
@@ -117,6 +126,39 @@ h3 {
   font-size: 1.2rem;
   text-align: center;
 }
+
+.custom-bg {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color: #0f172a; 
+  z-index: 1;
+}
+
+.custom-bg::before,
+.custom-bg::after {
+  content: '';
+  position: fixed;
+  top: 40%;
+  bottom: 0;
+  height: 500px;
+  width: 500px;
+  border-radius: 50%;
+  background: radial-gradient(
+      circle farthest-side,
+      rgba(255, 0, 182, 0.15),
+      rgba(255, 255, 255, 0)
+  );
+}
+
+.custom-bg::before {
+  left: -20%;
+}
+
+.custom-bg::after {
+  right: -20%;
+}
+
 
 @media (max-width: 768px) { 
   input {

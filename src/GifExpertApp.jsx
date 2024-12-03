@@ -12,6 +12,8 @@ export const GifExpertApp = () => {
     };
 
     return (
+        <>
+        <div className="custom-bg"></div>
         <div className="container relative z-10">
             <h1>Gif Expert App</h1>
 
@@ -25,5 +27,6 @@ export const GifExpertApp = () => {
                 <GifGrid key={category} category={category} />
             ))}
         </div>
+        </>
     );
 };
