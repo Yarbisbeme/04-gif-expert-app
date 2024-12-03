@@ -4,7 +4,7 @@ import { useColor } from '../hooks';
 
 export const GifItem = ({ title, url }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { shadowColor } = useColor([], url);
+    const { shadowColor } = useColor(url);
 
     const handleImageClick = () => {
         setIsModalOpen(true);
