@@ -1,4 +1,5 @@
-// GifItem.js
+
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useColor } from '../hooks';
 
@@ -40,3 +41,8 @@ export const GifItem = ({ title, url }) => {
         </>
     );
 };
+
+GifItem.propTypes = {
+    title: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired
+}

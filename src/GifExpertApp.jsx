@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { AddCategory, GifGrid, Esperando } from "./components";
-import '@fontsource-variable/onest';
 
 export const GifExpertApp = () => {
 
